@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Jujutsu</title>
+    <link rel="stylesheet" href="{% static 'product_list.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="{% url 'product_list' %}" class="nav-link">Все товары</a>
+            {% for category in categories %}
+                <a href="{% url 'product_by_category' slug=category.slug %}" class="nav-link">
+                    {{ category.name }}
+                </a>
+            {% endfor %}
+            <a href="{% url 'cart_detail' %}" class="nav-link">Корзина</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="product-grid">
+            {% for product in products %}
+                <div class="product-card">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% endif %}
+                    <h2 class="product-name">{{ product.name }}</h2>
+                    <p class="product-price">{{ product.price }} ₽</p>
+                    <p class="product-date">{{ product.created_at|date:"d.m.Y" }}</p>
+                    <a href="{% url 'cart_add' slug=product.slug %}" class="btn">Добавить</a>
+                    <a href="{% url 'product_detail' slug=product.slug %}" class="btn">Подробнее</a>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
