@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+    <link rel="stylesheet" href="{% static 'cart_detail.css' %}">
+</head>
+<body>
+    <main class="cart-container">
+        <h2 class="cart-title">Ваша корзина</h2>
+
+        {% if cart_products %}
+            <div class="cart-items">
+                {% for product in cart_products %}
+                    <div class="cart-item">
+                        {% if product.product.image %}
+                            <img src="{{ product.product.image.url }}" alt="{{ product.product.name }}" class="cart-item-image">
+                        {% endif %}
+                        <div class="cart-item-info">
+                            <h3 class="product-name">{{ product.product.name }}</h3>
+                            <p class="product-quantity">Количество: {{ product.quantity }} шт</p>
+                            <p class="product-price">Цена за шт: {{ product.product.price }} сом</p>
+                            <p class="product-total">Итого: {{ product.total_price }} сом</p>
+                            <a href=" {% url 'cart_remove' slug=product.product.slug %} "> Удалить </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="cart-summary">
+                <p class="total-price">Итого: <strong>{{ total_price }} сом</strong></p>
+                <a href="{% url 'order_create' %}" class="back-to-shop"> Оформить заказ </a>
+                <a href="{% url 'product_list' %}" class="back-to-shop">← Вернуться в магазин</a>
+            </div>
+        {% else %}
+            <p class="empty-cart">Ваша корзина пуста.</p>
+            <a href="{% url 'product_list' %}" class="back-to-shop">← Перейти в каталог</a>
+        {% endif %}
+    </main>
+</body>
+</html>

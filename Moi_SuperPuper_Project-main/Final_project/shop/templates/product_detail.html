@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }}</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #f5f5f5;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .product-detail {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #1f1f1f;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .product-detail-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        .product-detail-info {
+            text-align: center;
+        }
+
+        .product-detail-info h1 {
+            color: #ffd700;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .price {
+            color: #66ff99;
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+
+        .date, .stock {
+            color: #aaa;
+            font-size: 0.95em;
+        }
+
+        form {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        form textarea, form input {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: none;
+            background: #2c2c2c;
+            color: #fff;
+        }
+
+        form button {
+            padding: 10px 25px;
+            background-color: #ffd700;
+            color: #1f1f1f;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background-color: #ffe066;
+        }
+
+        .reviews {
+            margin-top: 40px;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+
+        .reviews p {
+            background-color: #2a2a2a;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .reviews .rating {
+            font-size: 0.9em;
+            color: #ccc;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 25px;
+            background-color: #444;
+            color: #fff;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #666;
+        }
+
+        .back-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <main class="product-detail">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-detail-image">
+        {% endif %}
+
+        <div class="product-detail-info">
+            <h1>{{ product.name }}</h1>
+            <p class="description">{{ product.description }}</p>
+            <p class="price">{{ product.price }} ₽</p>
+            <p class="date">Добавлено: {{ product.created_at|date:"d.m.Y" }}</p>
+            <p class="stock">В наличии: {{ product.stock }}</p>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Отправить отзыв</button>
+        </form>
+
+        <div class="reviews">
+            <h2>Отзывы</h2>
+            {% if reviews %}
+                {% for review in reviews %}
+                    <p>
+                        {{ review.text }}<br>
+                        <span class="rating">Оценка: {{ review.rating }} / 5</span>
+                    </p>
+                {% endfor %}
+            {% else %}
+                <p>Отзывов пока нет.</p>
+            {% endif %}
+        </div>
+
+        <div class="back-container">
+            <a href="{% url 'product_list' %}" class="back-button">← Вернуться в магазин</a>
+        </div>
+    </main>
+</body>
+</html>

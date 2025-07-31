@@ -1,0 +1,143 @@
+/* Основной стиль страницы */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Comic Sans MS", "Segoe UI", cursive, sans-serif;
+    background: linear-gradient(to bottom, #1a1a1a, #2a2a2a);
+    color: #e0e0e0;
+}
+
+/* Шапка и навигация */
+header {
+    background-color: #121212;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    border-bottom: 2px solid #333;
+}
+
+.navbar {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #f0f0f0;
+    font-weight: bold;
+    background-color: #333;
+    padding: 10px 16px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-link:hover {
+    background-color: #444;
+    transform: scale(1.05);
+}
+
+/* Сетка товаров */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 25px;
+    padding: 40px;
+}
+
+/* Карточка товара */
+.product-card {
+    background-color: #1e1e1e;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    background-color: #2a2a2a;
+    padding: 5px;
+}
+
+/* Название, цена, дата */
+.product-name {
+    font-size: 1.3em;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #ffd700; /* золотистая цена */
+    margin-bottom: 8px;
+}
+
+.product-date {
+    font-size: 0.9em;
+    color: #aaa;
+    margin-bottom: 15px;
+}
+
+/* Кнопки */
+.btn {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    padding: 8px 16px;
+    margin: 5px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+#cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.85);
+    color: #fff;
+    padding: 15px;
+    font-size: 14px;
+    text-align: center;
+    z-index: 1000;
+}
+
+#cookie-banner p {
+    margin: 0;
+    display: inline-block;
+}
+
+#cookie-banner button {
+    margin-left: 10px;
+    background-color: #4CAF50;
+    border: none;
+    padding: 8px 15px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+#cookie-banner button:hover {
+    background-color: #45a049;
+}
